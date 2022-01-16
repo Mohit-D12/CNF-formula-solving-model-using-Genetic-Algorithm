@@ -1,0 +1,1 @@
+# CNF-formula-solving-model-using-Genetic-Algorithm

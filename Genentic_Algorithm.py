@@ -1,3 +1,5 @@
+from Print_Result import Print_Result
+
 from random import choices, randint, random, randrange
 from time import time
 
@@ -125,4 +127,4 @@ class Genetic_Algorithm:
             best_fitness, best_model = current_fitness, population[0]
 
         #print the final result to console
-        self.print_result(sentence, self.convert_to_printable(best_model), best_fitness, duration)
+        Print_Result.print_result(sentence, best_model, best_fitness, duration)

@@ -5,6 +5,14 @@ from time import time
 
 class Genetic_Algorithm:
     
+    def __init__(self, POPULATION_SIZE, MODEL_SIZE, INITIAL_MUTATION_PROBABILITY, MAX_FITNESS, MAX_TIME, MAX_EPOCHS_CONVERGANCE):
+        self.model_size = MODEL_SIZE
+        self.population_size = POPULATION_SIZE
+        self.initial_mutation_probability = INITIAL_MUTATION_PROBABILITY
+        self.fitness_limit = MAX_FITNESS
+        self.time_limit = MAX_TIME
+        self.epoch_limit_convergance = MAX_EPOCHS_CONVERGANCE
+    
     #returns a randomly generated model 
     def generate_sample_model(self, model_size):
         return choices([0, 1], k = model_size)
@@ -67,18 +75,19 @@ class Genetic_Algorithm:
         return model
 
     #performs genetic algorithm
-    def evolve(self, sentence, population_size, model_size, mutation_probability, fitness_limit, time_limit, epoch_limit_convergance):
+    def evolve(self, sentence):
 
         #initialize variables
-        population = self.generate_population(population_size, model_size)
-        start_time = time.time()
+        population = self.generate_population(self.population_size, self.model_size)
+        mutation_probability = self.initial_mutation_probability
+        start_time = time()
         duration = 0
         epochs = 0
 
         converge_counter, converge_fitness = 0, 0
         best_fitness, best_model = 0, []
 
-        while duration < time_limit:
+        while duration < self.time_limit:
             epochs += 1
 
             #sort population according to their fitness value
@@ -96,7 +105,7 @@ class Genetic_Algorithm:
             if current_fitness >= best_fitness:
                 best_fitness, best_model = current_fitness, population[0]
 
-            if best_fitness >= fitness_limit or converge_counter > epoch_limit_convergance:
+            if best_fitness >= self.fitness_limit or converge_counter > self.epoch_limit_convergance:
                 break
             
             #generating next generation
@@ -110,8 +119,8 @@ class Genetic_Algorithm:
                 child_b = self.mutate(child_b, mutation_probability)
                 next_generation += [child_a, child_b]
 
-                duration = time.time() - start_time
-                if duration > time_limit:
+                duration = time() - start_time
+                if duration > self.time_limit:
                     break
             
             #update the current generation as next generation
@@ -128,4 +137,3 @@ class Genetic_Algorithm:
 
         #print the final result to console
         return [best_model, best_fitness, duration]
-        Print_Result.print_result(sentence, best_model, best_fitness, duration)

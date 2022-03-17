@@ -10,12 +10,12 @@ class CNF_Creator:
 
     def _CreateAClause(self):
         n = self._n
-        claus = random.sample(range(1,n+1),3)
+        clause = random.sample(range(1,n+1),3)
         for i in range(3):
-            claus[i] = -claus[i] if random.choice(range(2))==0 else claus[i]
+            clause[i] = -clause[i] if random.choice(range(2))==0 else clause[i]
             #above statement randomly negates some of the literals in the clause
-        claus.sort()
-        return claus
+        clause.sort()
+        return clause
 
     def CreateRandomSentence(self,m): #m is number of clauses in the sentence
         n = self._n
@@ -33,7 +33,7 @@ class CNF_Creator:
     
     
     def ReadCNFfromCSVfile(self):
-        with open('CNF4.csv') as csvfile:
+        with open('C:\\Users\\dharm\\Documents\\Workspace\\AI Project\\CNF Solver\\CNF2.csv') as csvfile:
             rows = csv.reader(csvfile)
             rows = list(rows)
         sentence = [[int(i) for i in ro] for ro in rows]

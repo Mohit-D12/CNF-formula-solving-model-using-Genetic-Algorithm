@@ -21,5 +21,6 @@ cnfC = CNF_Creator(n = MODEL_SIZE)
 sentence = cnfC.ReadCNFfromCSVfile()
 
 #Genetic Algorithm
-best_model, best_fitness, duration = Genetic_Algorithm.evolve(sentence, POPULATION_SIZE, MODEL_SIZE, INITIAL_MUTATION_PROBABILITY, MAX_FITNESS, MAX_TIME, MAX_EPOCHS_CONVERGANCE)
+model = Genetic_Algorithm(POPULATION_SIZE, MODEL_SIZE, INITIAL_MUTATION_PROBABILITY, MAX_FITNESS, MAX_TIME, MAX_EPOCHS_CONVERGANCE)
+best_model, best_fitness, duration = model.evolve(sentence)
 Print_Result.print_result(sentence, best_model, best_fitness, duration)

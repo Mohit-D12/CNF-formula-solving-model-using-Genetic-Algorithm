@@ -127,4 +127,5 @@ class Genetic_Algorithm:
             best_fitness, best_model = current_fitness, population[0]
 
         #print the final result to console
+        return [best_model, best_fitness, duration]
         Print_Result.print_result(sentence, best_model, best_fitness, duration)
